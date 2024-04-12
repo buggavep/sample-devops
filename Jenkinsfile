@@ -15,7 +15,8 @@ pipeline {
         
         stage('Package') {
             steps {
-                sh 'sudo docker build -f Dockerfile-8u131 -t buggavep/hello-world .'
+                sh "sudo chmod 777 * && ls -lart "
+                sh 'docker build -f Dockerfile-8u131 -t buggavep/hello-world .'
             }
         }
         
