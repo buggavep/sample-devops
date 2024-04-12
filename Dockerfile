@@ -2,6 +2,9 @@ FROM jenkins/inbound-agent:4.6-1-jdk11
 
 USER root
 
+# Add jenkins user to the passwd database
+RUN echo "jenkins:x:1000:1000:jenkins user,,,:/home/jenkins:/bin/bash" >> /etc/passwd
+
 # Install sudo
 RUN apt-get update && \
     apt-get install -y sudo
@@ -11,6 +14,7 @@ RUN usermod -aG sudo jenkins
 
 # Configure sudoers file to allow jenkins user to run commands as root without password
 RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 # Install Docker
 RUN apt-get update && \
     apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
