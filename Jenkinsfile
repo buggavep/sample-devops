@@ -15,7 +15,7 @@ pipeline {
         
         stage('Package') {
             steps {
-                sh 'docker build -f Dockerfile-8u131 -t buggavep/hello-world .'
+                sh 'sudo docker build -f Dockerfile-8u131 -t buggavep/hello-world .'
             }
         }
         
