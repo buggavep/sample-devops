@@ -2,6 +2,15 @@ FROM jenkins/inbound-agent:4.6-1-jdk11
 
 USER root
 
+# Install sudo
+RUN apt-get update && \
+    apt-get install -y sudo
+
+# Add jenkins user to sudo group
+RUN usermod -aG sudo jenkins
+
+# Configure sudoers file to allow jenkins user to run commands as root without password
+RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 # Install Docker
 RUN apt-get update && \
     apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
